@@ -15,7 +15,7 @@ public class PersonService {
         int number = 0;
 
         Firestore dbFirestore = FirestoreClient.getFirestore();
-        Iterable<DocumentReference> documentReferences = dbFirestore.collection("crud_user").listDocuments();
+        Iterable<DocumentReference> documentReferences = dbFirestore.collection("crud_person").listDocuments();
 
         for (DocumentReference myDocument : documentReferences) {
             // Get id of every document
@@ -24,10 +24,10 @@ public class PersonService {
         return number;
     }
 
-    public boolean checkIfUserExist(Person person) throws ExecutionException, InterruptedException {
+    public boolean checkIfPersonExist(Person person) throws ExecutionException, InterruptedException {
 
         Firestore dbFirestore = FirestoreClient.getFirestore();
-        Iterable<DocumentReference> documentReferences = dbFirestore.collection("crud_user").listDocuments();
+        Iterable<DocumentReference> documentReferences = dbFirestore.collection("crud_person").listDocuments();
 
         for (DocumentReference myDocument : documentReferences) {
             ApiFuture<DocumentSnapshot> future = myDocument.get();
@@ -43,7 +43,7 @@ public class PersonService {
     public Person getPerson(String document_id) throws InterruptedException, ExecutionException {
 
         Firestore dbFirestore = FirestoreClient.getFirestore(); // connect to firebase client
-        DocumentReference documentReference = dbFirestore.collection("crud_user").document(document_id); // get the document/user from firebase
+        DocumentReference documentReference = dbFirestore.collection("crud_person").document(document_id); // get the document/person from firebase
         ApiFuture<DocumentSnapshot> future = documentReference.get();
         DocumentSnapshot document = future.get();
 
@@ -58,7 +58,7 @@ public class PersonService {
 
     public ArrayList<Person> getAllPersons() throws ExecutionException, InterruptedException {
         Firestore dbFirestore = FirestoreClient.getFirestore();
-        Iterable<DocumentReference> documentReferences = dbFirestore.collection("crud_user").listDocuments();
+        Iterable<DocumentReference> documentReferences = dbFirestore.collection("crud_person").listDocuments();
 
         ArrayList<Person> persons = new ArrayList<>();
 
@@ -73,7 +73,7 @@ public class PersonService {
 
     public String deletePerson(String document_id) {
         Firestore dbFirestore = FirestoreClient.getFirestore();
-        ApiFuture<WriteResult> writeResult = dbFirestore.collection("crud_user").document(document_id).delete();
+        ApiFuture<WriteResult> writeResult = dbFirestore.collection("crud_person").document(document_id).delete();
 
         System.out.println(writeResult);
         return "Successfully deleted " + document_id;
@@ -81,16 +81,16 @@ public class PersonService {
 
     public String createPerson(Person person) throws ExecutionException, InterruptedException {
 
-        if (!checkIfUserExist(person)) {
-            return "User " + person.getName() + " " + person.getLastname() + " already exist!";
+        if (!checkIfPersonExist(person)) {
+            return "Person " + person.getName() + " " + person.getLastname() + " already exist!";
         }
 
         Firestore dbFirestore = FirestoreClient.getFirestore();
 
         person.setDocument_id(String.valueOf(getNumberOfDocumentsIds() + 1));
 
-        ApiFuture<WriteResult> collectionsApiFuture = dbFirestore.collection("crud_user").document(String.valueOf(getNumberOfDocumentsIds() + 1)).set(person);
-        //ApiFuture<DocumentReference> collectionsApiFuture = dbFirestore.collection("crud_user").add(person);
+        ApiFuture<WriteResult> collectionsApiFuture = dbFirestore.collection("crud_person").document(String.valueOf(getNumberOfDocumentsIds() + 1)).set(person);
+        //ApiFuture<DocumentReference> collectionsApiFuture = dbFirestore.collection("crud_person").add(person);
 
         try {
             return "Added new person - " + person.toString() + "\n" + collectionsApiFuture.get().getUpdateTime().toString();
@@ -102,16 +102,17 @@ public class PersonService {
 
     public String updatePerson(Person person, String document_id) throws ExecutionException, InterruptedException {
         Firestore dbFirestore = FirestoreClient.getFirestore();
-        DocumentReference documentReference = dbFirestore.collection("crud_user").document(document_id);
+        DocumentReference documentReference = dbFirestore.collection("crud_person").document(document_id);
         ApiFuture<DocumentSnapshot> future = documentReference.get();
         DocumentSnapshot document = future.get();
 
         if (!document.exists())
-            return "User with document_id: \"" + document_id + "\" doesn't exist!";
+            return "Person with document_id: \"" + document_id + "\" doesn't exist!";
 
+        person.setDocument_id(document_id);
         documentReference.set(person);
 
-        return "Updated user: " + person.toString();
+        return "Updated person: " + person.toString();
     }
 
 }

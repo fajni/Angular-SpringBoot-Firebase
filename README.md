@@ -22,17 +22,3 @@ Just backend without frontend.
 │
 └── README.md
 ```
-
-## Final Project Structure
-
-```
-├── source
-│   │
-│   ├── backend     # Contains source code for backend (Java)
-│   │
-│   └── frontend    # Contains source code for frontend (TypeScript)
-│
-├── notes           # My notes
-│
-└── README.md
-```

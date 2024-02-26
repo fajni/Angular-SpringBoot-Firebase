@@ -2,8 +2,7 @@
 
 # Spring-Boot-Firebase-Simple
 
-This is a simple Spring Boot API that uses Firebase as database. 
-Just backend without frontend.
+This is a simple Spring Boot API that uses Firebase as database and Angular for Frontend.
 
 ## Project Structure
 

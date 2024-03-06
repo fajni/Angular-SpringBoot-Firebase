@@ -1,28 +1,8 @@
-<img src ="notes/images/application/spring&firebase.png"/>
-
 # Spring-Boot-Firebase-Simple
 
 This is a simple Spring Boot API that uses Firebase as database and Angular for Frontend.
 
 ## Project Structure
-
-```
-├── source
-│   │
-│   ├── main
-│   │   │
-│   │   ├── java
-│   │   │
-│   │   └── resources       # Connection with firebase.
-│   │
-│   └── test                # Unit testing
-│
-├── notes
-│
-└── README.md
-```
-
-## Final Project Structure
 
 ```
 ├── source
@@ -35,3 +15,21 @@ This is a simple Spring Boot API that uses Firebase as database and Angular for 
 │
 └── README.md
 ```
+
+## Running App
+
+Must run both frontend & backend together.
+
+## Running Frontend
+
+- `npm install`
+- `npm start`
+- __`ng serve`__
+
+(_localhost:4200_)
+
+## Running Backend
+
+- Run local Tomcat Server in IntelliJ. 
+
+(_localhost:8080_)

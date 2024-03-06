@@ -38,6 +38,7 @@ public class CRUDRunner {
     }
 
     // communication with frontend/access to frontend
+    // don't need this explicit, it depends on the browser that is used
     @Bean
     public CorsFilter corsFilter(){
         CorsConfiguration corsConfiguration = new CorsConfiguration();

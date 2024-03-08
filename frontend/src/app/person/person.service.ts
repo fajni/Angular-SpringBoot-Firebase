@@ -22,11 +22,11 @@ export class PersonService {
     }
 
     public addPerson(person: Person): Observable<Person> {
-        return this.http.post<Person>(`${this.apiServerUrl}/create`, person);
+        return this.http.post<Person>(`${this.apiServerUrl}/create`, person, {responseType: 'json'});
     }
 
     public updatePerson(person: Person, document_id: string): Observable<Person> {
-        return this.http.put<Person>(`${this.apiServerUrl}/update?document_id=${document_id}`, person);
+        return this.http.put<Person>(`${this.apiServerUrl}/update/${document_id}`, person, {responseType: "json"});
     }
 
     public deletePerson(document_id: string): Observable<void> {

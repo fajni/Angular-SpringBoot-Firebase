@@ -1,4 +1,8 @@
-# Spring-Boot-Firebase-Simple
+# SpringBoot-Firebase-Angular-Simple-Project
+
+<p align = "center">
+<img src="https://miro.medium.com/v2/resize:fit:785/0*69C4SWVvcLAc4xYm.png" width="70%">
+</p>
 
 This is a simple Spring Boot API that uses Firebase as database and Angular for Frontend.
 
@@ -18,7 +22,7 @@ This is a simple Spring Boot API that uses Firebase as database and Angular for 
 
 ## Running App
 
-Must run both frontend & backend together.
+Must run both __frontend__ & __backend__ together.
 
 ## Running Frontend
 
@@ -28,8 +32,22 @@ Must run both frontend & backend together.
 
 (_localhost:4200_)
 
+<details>
+<summary>Image Preview</summary>
+<img src = "./notes/preview_images/frontend_preview.png">
+</details>
+
 ## Running Backend
 
 - Run local Tomcat Server in IntelliJ. 
 
 (_localhost:8080_)
+
+<details>
+<summary>Image Preview</summary>
+<img src = "./notes/preview_images/backend_preview.png">
+</details>
+
+<hr/>
+
+Check folders for more in README.md

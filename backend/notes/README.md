@@ -1,11 +1,14 @@
-## NOTES
+<p align = "center">
+<img src="./images/application/spring&firebase.png" width="80%">
+</p>
 
+## Notes
 MVC Architecture.
 
 ### General picture of project & Development
 
 <details>
-<summary></summary>
+<summary>Image</summary>
 <img src="images/excalidraw.png"/>
 </details>
 

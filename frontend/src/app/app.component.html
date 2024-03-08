@@ -1,3 +1,184 @@
-<div *ngFor = "let person of persons">
-  <div>{{person.name}}</div>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="collapse navbar-collapse" id="navbarToggler">
+    <a class="navbar-text px-3" href="#">
+      <img src="https://getbootstrap.com/docs/5.0/assets/brand/bootstrap-logo.svg" alt="" width="20" height="14"
+        class="d-inline-block align-text-center">
+      Bootstrap
+    </a>
+    <a class="navbar-brand" style="color: white;">Person Manager App</a>
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <li class="nav-item active">
+        <a class="nav-link btn btn-success tooltips" (click)="onOpenModal(undefined, 'add')" href="#addPerson">Add Person<span class="sr-only"></span></a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input name="key" #key="ngModel" ngModel (ngModelChange)="searchPersons(key.value)" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+    </form>
+  </div>
+</nav>
+
+<br />
+
+<div class="container" id="main-container">
+  <div class="row">
+    <div *ngFor="let person of persons" class="col-md-6 col-xl-3">
+      <div class="card m-b-30">
+        <div class="card-body row">
+          <div class="col-6">
+            <a href=""><img src="{{person?.imageUrl}}" alt="" class="img-fluid rounded-circle w-60"></a>
+          </div>
+          <div class="col-6 card-title align-self-center mb-0">
+            <h5>{{person.name}} {{person.lastname}}</h5>
+            <p class="m-0">{{person.profession}}</p>
+          </div>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item"><i class="fa fa-envelope float-right"></i><i>Email</i>: <a>unavailable</a></li>
+          <li class="list-group-item"><i class="fa fa-phone float-right"></i><i>Phone</i>: unavailable</li>
+        </ul>
+        <div class="card-body">
+          <div class="float-right btn-group btn-group-sm" style="color: white;">
+            <a (click)="onOpenModal(person, 'edit')" class="btn btn-primary tooltips" data-placement="top" data-toggle="tooltip"
+              data-original-title="Edit"><i class="fa fa-pencil"> Edit</i></a>
+            <a (click)="onOpenModal(person, 'delete')" class="btn btn-danger tooltips" data-placement="top" data-toggle="tooltip"
+              data-original-title="Delete"><i class="fa fa-times"> Delete</i></a>
+          </div>
+          <!--
+                    <ul class="social-links list-inline mb-0">
+                        <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Facebook"><i class="fa fa-facebook-f"></i></a></li>
+                        <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Twitter"><i class="fa fa-twitter"></i></a></li>
+                        <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Skype"><i class="fa fa-skype"></i></a></li>
+                    </ul>
+                  -->
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Add Person Modal -->
+<div class="modal fade" id="addPersonModal" tabindex="-1" role="dialog" aria-labelledby="addPersonModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addPersonModalLabel">Add Person</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #addForm="ngForm" (ngSubmit)="onAddPerson(addForm)">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" ngModel name="name" class="form-control" id="name" placeholder="Enter Name" required>
+          </div>
+          <div class="form-group">
+            <label for="lastname">Lastname</label>
+            <input type="text" ngModel name="lastname" class="form-control" id="lastname" placeholder="Enter Lastname" required>
+          </div>
+          <div class="form-group">
+            <label for="profession">Profession</label>
+            <input type="text" ngModel name="profession" class="form-control" id="profession" placeholder="Enter Profession" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" ngModel name="email" class="form-control" id="email" placeholder="Enter Email">
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone</label>
+            <input type="text" ngModel name="phone" class="form-control" id="phone" placeholder="Enter Phone">
+          </div>
+          <div class="form-group">
+            <label for="phone">Image URL</label>
+            <input type="text" ngModel name="imageUrl" class="form-control" id="imageUrl" placeholder="Enter Image URL"
+              required>
+          </div>
+          <div class="modal-footer">
+            <button type="button" id="add-person-form-close" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button [disabled]="addForm.invalid" type="submit" class="btn btn-primary">Save changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Edit Modal -->
+<div class="modal fade" id="updatePersonModal" tabindex="-1" role="dialog" aria-labelledby="personEditModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="updatePersonModalLabel">Edit Person: <br/> <i>{{editPerson?.name}} {{editPerson?.lastname}}</i></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #editForm = "ngForm">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" ngModel="{{editPerson?.name}}" name="name" class="form-control" id="name" placeholder="Enter Name" required>
+          </div>
+          <div class="form-group">
+            <label for="lastname">Lastname</label>
+            <input type="text" ngModel="{{editPerson?.lastname}}" name="lastname" class="form-control" id="lastname" placeholder="Enter Lastname" required>
+          </div>
+          <div class="form-group">
+            <label for="profession">Profession</label>
+            <input type="text" ngModel="{{editPerson?.profession}}" name="profession" class="form-control" id="profession" placeholder="Enter Profession" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" ngModel="/" name="email" class="form-control" id="email" placeholder="Enter Email" required>
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone</label>
+            <input type="text" ngModel="/" name="phone" class="form-control" id="phone" placeholder="Enter Phone" required>
+          </div>
+          <div class="form-group">
+            <label for="phone">Image URL</label>
+            <input type="text" ngModel="{{editPerson?.imageUrl}}" name="imageUrl" class="form-control" id="imageUrl" placeholder="Enter Image URL"
+              required>
+          </div>
+          <div class="modal-footer">
+            <button type="button" id="" data-dismiss="modal" class="btn btn-secondary">Close</button>
+            <button (click)="onUpdatePerson(editPerson!, editPerson!.document_id)" data-dismiss="modal" class="btn btn-primary">Save changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Delete Modal -->
+<div class="modal fade" id="deletePersonModal" tabindex="-1" role="dialog" aria-labelledby="deleteModelLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteModelLabel">Delete Person</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete person {{deletePerson?.name}} {{deletePerson?.lastname}}?</p>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+          <button (click)="onDeletePerson(deletePerson!.document_id)" class="btn btn-danger" data-dismiss="modal">Yes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Notification for no persons -->
+<div *ngIf="persons?.length == 0" class="col-lg-12 col-md-12 col-xl-12">
+  <div class="alert alert-info" role="alert">
+    <h4 class="alert-heading">NO PERSONS!</h4>
+    <p>No Persons were found.</p>
+  </div>
 </div>

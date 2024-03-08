@@ -47,6 +47,11 @@ public class PersonController {
         return personService.updatePerson(person, document_id);
     }
 
+    @PutMapping("/update/{document_id}")
+    public String updatePerson2(@RequestBody Person person, @PathVariable("document_id") String document_id) throws InterruptedException, ExecutionException {
+        return personService.updatePerson(person, document_id);
+    }
+
 
 
     //Simple Test

@@ -4,8 +4,6 @@
 <img src="https://miro.medium.com/v2/resize:fit:785/0*69C4SWVvcLAc4xYm.png" width="70%">
 </p>
 
-This is a simple Spring Boot API that uses Firebase as database and Angular for Frontend.
-
 ## Project Structure
 
 ```
@@ -24,10 +22,10 @@ This is a simple Spring Boot API that uses Firebase as database and Angular for 
 
 Must run both __frontend__ & __backend__ together.
 
-## Running Frontend
+### Running Frontend
 
 - `npm install`
-- `npm start`
+- ~~`npm start`~~
 - __`ng serve`__
 
 (_localhost:4200_)
@@ -37,7 +35,7 @@ Must run both __frontend__ & __backend__ together.
 <img src = "./notes/preview_images/frontend_preview.png">
 </details>
 
-## Running Backend
+### Running Backend
 
 - Run local Tomcat Server in IntelliJ. 
 
@@ -49,5 +47,7 @@ Must run both __frontend__ & __backend__ together.
 </details>
 
 <hr/>
+
+Available endpoints inside <a href="./Endpoints.md">Endpoints.md</a> file.
 
 Check folders for more in README.md

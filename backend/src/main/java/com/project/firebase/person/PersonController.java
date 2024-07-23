@@ -1,5 +1,6 @@
 package com.project.firebase.person;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,8 +11,9 @@ import java.util.concurrent.ExecutionException;
 @RestController
 public class PersonController {
 
-    public PersonService personService;
+    public final PersonService personService;
 
+    @Autowired
     public PersonController(PersonService personService) {
         this.personService = personService;
     }
@@ -22,7 +24,7 @@ public class PersonController {
         return new ResponseEntity<>(personService.getPerson(document_id), HttpStatus.OK);
     }
 
-    @GetMapping("/getAll")
+    @GetMapping({"/","/getAll"})
     public List<Person> getAllPersons() throws InterruptedException, ExecutionException {
         return personService.getAllPersons();
     }

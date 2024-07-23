@@ -63,8 +63,7 @@ public class DeletePersonTests {
     }
 
     @Test
-    public void deletePersonTest2(){
-        //TODO: Return document id for deleting even if the document doesn't exist!
-        assertEquals(personService.deletePerson("200"), "Successfully deleted 200");
+    public void deletePersonTest2() throws ExecutionException, InterruptedException{
+        assertEquals(personService.deletePerson("200"), "Person with 200 document id is not found!");
     }
 }

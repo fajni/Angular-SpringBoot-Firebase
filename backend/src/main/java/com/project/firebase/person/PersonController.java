@@ -35,7 +35,7 @@ public class PersonController {
     }
 
     @DeleteMapping("/delete")
-    public String deletePerson(@RequestParam String document_id) throws InterruptedException, ExecutionException {
+    public ResponseEntity<String> deletePerson(@RequestParam String document_id) throws InterruptedException, ExecutionException {
         return personService.deletePerson(document_id);
     }
 
@@ -44,13 +44,13 @@ public class PersonController {
         return personService.createPerson(person);
     }
 
-    @PutMapping("/update")
-    public String updatePerson(@RequestBody Person person, @RequestParam String document_id) throws InterruptedException, ExecutionException {
+    @PutMapping("/update") // .../update?document_id=1
+    public ResponseEntity<String> updatePerson(@RequestBody Person person, @RequestParam String document_id) throws InterruptedException, ExecutionException {
         return personService.updatePerson(person, document_id);
     }
 
-    @PutMapping("/update/{document_id}")
-    public String updatePerson2(@RequestBody Person person, @PathVariable("document_id") String document_id) throws InterruptedException, ExecutionException {
+    @PutMapping("/update/{document_id}") // .../update/1
+    public ResponseEntity<String> updatePerson2(@RequestBody Person person, @PathVariable("document_id") String document_id) throws InterruptedException, ExecutionException {
         return personService.updatePerson(person, document_id);
     }
 

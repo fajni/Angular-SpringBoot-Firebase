@@ -1,0 +1,14 @@
+<div class="container">
+    <h3>Persons:</h3>
+    <div class="d-flex justify-content-around">
+        <div class="row">
+
+            @for (p of persons(); track p.document_id) {
+                <app-person [person]="p" />
+            } @empty {
+                <p>No persons found!</p>
+            }
+            
+        </div>
+    </div>
+</div>

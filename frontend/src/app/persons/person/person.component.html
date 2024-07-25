@@ -1,0 +1,28 @@
+<div class="col-sm">
+    <div class="card border-secondary mb-2" style="max-width: 20rem;">
+
+        <div class="card-header text-center">
+            <h5 class="card-title">{{person().name}} {{person().lastname}}</h5>
+        </div>
+
+        <div class="card-body text-secondary">
+            <div class="text-center">
+                <img src="{{person().imageUrl}}" class="card-img-top img-thumbnail center rounded-circle" />
+            </div>
+            <hr />
+            <h5 class="card-title text-center">{{person().profession}} </h5>
+        </div>
+
+        <div class="card-footer">
+            <div class="float-right btn-group btn-group-sm" style="color: white;">
+                <a class="btn btn-primary" type="button" (click)="onEdit(person())"><i class="fa fa-pencil"></i> Edit</a>
+                <a class="btn btn-danger" type="button" (click)="onDelete(person())"><i class="fa fa-times"></i> Delete</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@if(openEditModal()){
+    <app-edit [editPerson]="person()" [(openEditModal)]="openEditModal"/>
+}

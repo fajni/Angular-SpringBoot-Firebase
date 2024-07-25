@@ -15,7 +15,9 @@
 │
 ├── notes           # My notes
 │
-└── README.md
+├── README.md
+│
+└── Endpoints.md    # Available endpoints
 ```
 
 ## Running App
@@ -32,7 +34,7 @@ Must run both __frontend__ & __backend__ together.
 
 <details>
 <summary>Image Preview</summary>
-<img src = "./notes/preview_images/frontend_preview.png">
+<img src = "./notes/preview/frontend.png">
 </details>
 
 ### Running Backend
@@ -43,7 +45,7 @@ Must run both __frontend__ & __backend__ together.
 
 <details>
 <summary>Image Preview</summary>
-<img src = "./notes/preview_images/backend_preview.png">
+<img src = "./notes/preview/backend.PNG">
 </details>
 
 <hr/>

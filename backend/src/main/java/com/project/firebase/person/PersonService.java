@@ -4,6 +4,8 @@ import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.*;
 import com.google.firebase.cloud.FirestoreClient;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -44,7 +46,6 @@ public class PersonService {
 
     public Person getPerson(String document_id) throws InterruptedException, ExecutionException {
 
-
         DocumentReference documentReference = dbFirestore.collection("crud_person").document(document_id); // get the document/person from firebase
         ApiFuture<DocumentSnapshot> future = documentReference.get();
         DocumentSnapshot document = future.get();
@@ -73,15 +74,16 @@ public class PersonService {
         return persons;
     }
 
-    public String deletePerson(String document_id) throws ExecutionException, InterruptedException {
+    public ResponseEntity<String> deletePerson(String document_id) throws ExecutionException, InterruptedException {
 
         if (getPerson(document_id) == null) {
-            return "Person with " + document_id + " document id is not found!";
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"message\": \"Person with " + document_id + " id not found\"}");
         }
 
         ApiFuture<WriteResult> writeResult = dbFirestore.collection("crud_person").document(document_id).delete();
 
-        return "Successfully deleted " + document_id;
+        //return "Successfully deleted " + document_id;
+        return ResponseEntity.ok("{\"message\": \"Person with "+document_id+" id DELETED successfully\"}");
     }
 
     public String createPerson(Person person) throws ExecutionException, InterruptedException {
@@ -105,19 +107,19 @@ public class PersonService {
         }
     }
 
-    public String updatePerson(Person person, String document_id) throws ExecutionException, InterruptedException {
+    public ResponseEntity<String> updatePerson(Person person, String document_id) throws ExecutionException, InterruptedException {
 
         DocumentReference documentReference = dbFirestore.collection("crud_person").document(document_id);
         ApiFuture<DocumentSnapshot> future = documentReference.get();
         DocumentSnapshot document = future.get();
 
         if (!document.exists())
-            return "Person with document_id: \"" + document_id + "\" doesn't exist!";
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"message\": \"Person with " + document_id + " id doesn't exist\"}");
 
         person.setDocument_id(document_id);
         documentReference.set(person);
 
-        return "Updated person: " + person.toString();
+        return ResponseEntity.ok("{\"message\": \"Person with "+document_id+" id UPDATED successfully\"}");
     }
 
 }

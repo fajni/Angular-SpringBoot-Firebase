@@ -22,7 +22,7 @@
 
 ## Running App
 
-Must run both __frontend__ & __backend__ together.
+Must run both __frontend__ and __backend__ together.
 
 ### Running Frontend
 

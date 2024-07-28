@@ -1,42 +1,71 @@
-import { Component, DestroyRef, inject, input, model, signal } from '@angular/core';
+import { Component, DestroyRef, inject, input, model, OnInit, signal } from '@angular/core';
 import { Person } from '../person.model';
 import { PersonsService } from '../../persons.service';
-import { FormsModule } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-edit',
   standalone: true,
-  imports: [FormsModule],
+  imports: [ReactiveFormsModule],
   templateUrl: './edit.component.html',
   styleUrl: './edit.component.css'
 })
-export class EditComponent {
+export class EditComponent implements OnInit {
 
   public editPerson = input.required<Person>();
   public openEditModal = model.required<boolean>();
 
+  private person!: Person;
   private personsService = inject(PersonsService);
   private destoryRef = inject(DestroyRef);
+  
+  public editForm = new FormGroup({
+    name: new FormControl('', { validators: [] }),
+    lastname: new FormControl('', { validators: [] }),
+    profession: new FormControl('', { validators: [] }),
+    imageUrl: new FormControl('', { validators: [] }),
+  });
 
-  public enteredName = '';
-  public enteredLastname = '';
-  public enteredProfession = '';
-  public enteredImageUrl = '';
+  // set fields for form
+  ngOnInit(): void {
+    this.editForm.controls.name.setValue(this.editPerson().name);
+    this.editForm.controls.lastname.setValue(this.editPerson().lastname);
+    this.editForm.controls.profession.setValue(this.editPerson().profession);
+    this.editForm.controls.imageUrl.setValue(this.editPerson().imageUrl);
+  }
 
   onCloseModal() {
     this.openEditModal.set(false);
   }
 
-  onSaveModal(document_id: string, newName: string, newLastname: string, newProfession: string, newImageUrl: string) {
+  private printFormValues() {
+    console.log('Name: ' + this.editForm.controls.name.value);
+    console.log('Lastname: ' + this.editForm.controls.lastname.value);
+    console.log('Profession: ' + this.editForm.controls.profession.value);
+    console.log('Image URL: ' + this.editForm.controls.imageUrl.value);
+  }
 
-    const newPerson = new Person(document_id, newName, newLastname, newProfession, newImageUrl);
-    console.log(newPerson.toString());
+  private createNewPerson(): Person {
+    return new Person(
+      this.editPerson().document_id,
+      this.editForm.controls.name.value!,
+      this.editForm.controls.lastname.value!,
+      this.editForm.controls.profession.value!,
+      this.editForm.controls.imageUrl.value!
+    );
+  }
 
-    const subscription = this.personsService.editPerson(document_id, newPerson).subscribe({
-      error: (error) => { alert(error.message); },
+  onSubmit() {
+    this.printFormValues();
+
+    this.person = this.createNewPerson();
+    console.log('Updated person: ' + this.person.toString());
+
+    const subscription = this.personsService.editPerson(this.editPerson().document_id, this.person).subscribe({
+      error: (error) => { console.log(error.message); },
       complete: () => {
-        console.log('Updated person with ' + document_id + ' id!');
-        // window.location.reload();
+        console.log('Updated person ' + this.person.document_id);
+        window.location.reload();
       }
     });
 
@@ -46,4 +75,5 @@ export class EditComponent {
 
     this.openEditModal.set(false);
   }
+
 }

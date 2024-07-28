@@ -1,0 +1,2 @@
+backend/src/test/java/**/*.java linguist-detectable=false
+backend/src/main/java/com/project/firebase/CRUDRunner.java linguist-detectable=false

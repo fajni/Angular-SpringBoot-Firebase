@@ -1,12 +1,11 @@
 <div class="modal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
 
-        <form (ngSubmit)="onSaveModal(editPerson().document_id, enteredName.value, enteredLastname.value, enteredProfession.value, enteredImageUrl.value)">
+        <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
             <div class="modal-content">
 
                 <div class="modal-header">
-                    <h4 class="modal-title">Edit {{editPerson().name}} {{editPerson().lastname}} (ID:
-                        {{editPerson().document_id}})</h4>
+                    <h4 class="modal-title">Edit {{editPerson().name}} {{editPerson().lastname}} (ID:{{editPerson().document_id}})</h4>
                     <button type="button" class="close" aria-label="Close" (click)="onCloseModal()">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -15,19 +14,19 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label>Enter New Name:</label>
-                        <input type="text" placeholder="Name" class="form-control" value="{{editPerson().name}}" required #enteredName />
+                        <input type="text" placeholder="Name" class="form-control" formControlName="name" />
                     </div>
                     <div class="form-group">
                         <label>Enter New Lastname:</label>
-                        <input type="text" placeholder="Lastname" class="form-control" value="{{editPerson().lastname}}" required #enteredLastname />
+                        <input type="text" placeholder="Lastname" class="form-control" formControlName="lastname" />
                     </div>
                     <div class="form-group">
                         <label>Enter New Profession:</label>
-                        <input type="text" placeholder="Profession" class="form-control" value="{{editPerson().profession}}" required #enteredProfession />
+                        <input type="text" placeholder="Profession" class="form-control" formControlName="profession" />
                     </div>
                     <div class="form-group">
                         <label>Enter New Image URL:</label>
-                        <input type="text" placeholder="ImageURL" class="form-control" value="{{editPerson().imageUrl}}" required #enteredImageUrl />
+                        <input type="text" placeholder="ImageURL" class="form-control" formControlName="imageUrl" />
                     </div>
 
                 </div>

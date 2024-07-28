@@ -1,4 +1,4 @@
-# SpringBoot-Firebase-Angular-Simple-Project
+# Angular + Spring Boot + Firebase
 
 <p align = "center">
 <img src="https://miro.medium.com/v2/resize:fit:785/0*69C4SWVvcLAc4xYm.png" width="70%">
@@ -22,7 +22,7 @@
 
 ## Running App
 
-Must run both __frontend__ and __backend__ together.
+Must run both __backend__ and __frontend__ together.
 
 ### Running Frontend
 

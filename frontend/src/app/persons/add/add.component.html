@@ -1,0 +1,41 @@
+<div class="modal-dialog" role="document">
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" >
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title">Add New Person</h4>
+                <button type="button" class="close" aria-label="Close" (click)="onClose()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Enter Name:</label>
+                    <input type="text" placeholder="Name" class="form-control" formControlName="name" />
+                </div>
+                <div class="form-group">
+                    <label>Enter Lastname:</label>
+                    <input type="text" placeholder="Lastname" class="form-control" formControlName="lastname" />
+                </div>
+                <div class="form-group">
+                    <label>Enter Profession:</label>
+                    <input type="text" placeholder="Profession" class="form-control" formControlName="profession" />
+                </div>
+                <div class="form-group">
+                    <label>Enter Image URL:</label>
+                    <input type="text" placeholder="ImageURL" class="form-control" formControlName="imageUrl" />
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" (click)="onClose()">Close</button>
+                <button type="submit" class="btn btn-primary">Save Changes</button>
+            </div>
+
+        </div>
+    </form>
+
+</div>

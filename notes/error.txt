@@ -1,2 +1,35 @@
 localhost:4200 says
 Http failure during parsing for http://localhost:8080...
+
+## Error in backend: 
+
+Use `ResponseEntity` when returning in method!
+
+### DELETE HTTP Request
+
+Delete http request DID NOT return the appropriate response.
+
+#### Solution:
+- Service:
+<pre>
+public ResponseEntity<String> deletePerson(String document_id) throws ExecutionException, InterruptedException {
+
+        if (getPerson(document_id) == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"message\": \"Person with " + document_id + " id not found\"}");
+        }
+
+        ApiFuture<WriteResult> writeResult = dbFirestore.collection("crud_person").document(document_id).delete();
+
+        return ResponseEntity.ok("{\"message\": \"Person with "+document_id+" id deleted successfully\"}");
+    }
+</pre>
+
+- Controller:
+<pre>
+@DeleteMapping("/delete")
+    public ResponseEntity<String> deletePerson(@RequestParam String document_id) throws InterruptedException, ExecutionException {
+        return personService.deletePerson(document_id);
+    }
+</pre>
+
+### 

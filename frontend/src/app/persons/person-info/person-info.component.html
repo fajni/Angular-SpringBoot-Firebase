@@ -1,0 +1,14 @@
+<div>
+
+<p>ID: {{document_id()}}</p>
+<p>Name: {{person()?.name}}</p>
+<p>Lastname: {{person()?.lastname}}</p>
+<p>Profession: {{person()?.profession}}</p>
+<p>Description: [not implemented]</p>
+<p>Address: [not implemented]</p>
+
+<button [routerLink]="['/']" class="btn btn-outline-danger btn-sm">Close</button>
+
+<button class="btn btn-outline-secondary btn-sm" (click)="onPrevious()" >Previous</button>
+<button class="btn btn-outline-secondary btn-sm" (click)="onNext()">Next</button>
+</div>

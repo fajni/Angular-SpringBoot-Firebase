@@ -14,8 +14,9 @@
         </div>
 
         <div class="card-footer">
+            <a class="btn btn-outline-secondary btn-sm" [routerLink]="'/get/'+person().document_id" >More info</a>
             <div class="float-right btn-group btn-group-sm" style="color: white;">
-                <a class="btn btn-primary" type="button" (click)="onEdit(person())"><i class="fa fa-pencil"></i> Edit</a>
+                <a class="btn btn-primary" type="button" (click)="onEdit()"><i class="fa fa-pencil"></i> Edit</a>
                 <a class="btn btn-danger" type="button" (click)="onDelete(person())"><i class="fa fa-times"></i> Delete</a>
             </div>
         </div>
@@ -24,5 +25,5 @@
 </div>
 
 @if(openEditModal()){
-    <app-edit [editPerson]="person()" [(openEditModal)]="openEditModal"/>
+    <app-edit [editPerson]="person()" [(openEditModal)]="openEditModal" />
 }

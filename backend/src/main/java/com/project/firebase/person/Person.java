@@ -14,18 +14,20 @@ public class Person {
     private String lastname;
     private String profession;
     private String imageUrl;
+    private String description;
 
-    public Person(String name, String lastname, String profession) {
+    public Person(String name, String lastname, String profession, String description) {
         super();
         this.name = name;
         this.lastname = lastname;
         this.profession = profession;
         this.imageUrl = null;
+        this.description = description;
     }
 
     @Override
     public String toString() {
-        return "Name: " + name + ", Lastname: " + lastname + ", Profession: " + profession;
+        return "Name: " + name + ", Lastname: " + lastname + ", Profession: " + profession + ", Description: " + description;
     }
 
 }

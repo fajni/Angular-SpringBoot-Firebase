@@ -22,6 +22,7 @@ export class AddComponent {
     lastname: new FormControl('', { validators: [] }),
     profession: new FormControl('', { validators: [] }),
     imageUrl: new FormControl('', { validators: [] }),
+    description: new FormControl('', { validators: [] })
   });
 
   public onClose() {
@@ -33,6 +34,7 @@ export class AddComponent {
     console.log('Lastname: ' + this.form.controls.lastname.value);
     console.log('Profession: ' + this.form.controls.profession.value);
     console.log('Image URL: ' + this.form.controls.imageUrl.value);
+    console.log('Description: ' + this.form.controls.description.value);
   }
 
   private createNewPerson(): Person {
@@ -42,7 +44,8 @@ export class AddComponent {
       this.form.controls.name.value!,
       this.form.controls.lastname.value!,
       this.form.controls.profession.value!,
-      this.form.controls.imageUrl.value!
+      this.form.controls.imageUrl.value!,
+      this.form.controls.description.value!
     );
 
   }
@@ -51,8 +54,8 @@ export class AddComponent {
 
     const newPerson = this.createNewPerson();
     const subscription = this.personsService.addPerson(newPerson).subscribe({
-      complete: () => { 
-        console.log('Added person: '+newPerson.toString())
+      complete: () => {
+        console.log('Added person: ' + newPerson.toString())
         this.personsService.getPersons().subscribe();
       }
     });

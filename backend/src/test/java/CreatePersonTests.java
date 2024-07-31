@@ -56,7 +56,7 @@ public class CreatePersonTests {
 
     @Test
     public void createPersonTest1() throws ExecutionException, InterruptedException {
-        Person person = new Person("Test Name", "Test Lastname", "Test Profession");
+        Person person = new Person("Test Name", "Test Lastname", "Test Profession", "Test Description");
         personService.createPerson(person);
 
         assertEquals(person.toString(), personService.getPerson("2").toString());
@@ -65,8 +65,8 @@ public class CreatePersonTests {
 
     @Test
     public void createPersonTest2() throws ExecutionException, InterruptedException {
-        Person person1 = new Person("Test Name", "Test Lastname", "Test Profession");
-        Person person2 = new Person("Test Name", "Test Lastname", "Test Profession");
+        Person person1 = new Person("Test Name", "Test Lastname", "Test Profession", "Test Description");
+        Person person2 = new Person("Test Name", "Test Lastname", "Test Profession", "Test Description");
 
         personService.createPerson(person1);
 

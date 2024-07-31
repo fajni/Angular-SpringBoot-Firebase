@@ -5,7 +5,8 @@ export class Person implements IPerson {
         public name: string,
         public lastname: string,
         public profession: string,
-        public imageUrl: string
+        public imageUrl: string,
+        public description: string
     ) { }
 
     toString(): string {
@@ -13,7 +14,8 @@ export class Person implements IPerson {
             'name: ' + this.name + '\n' +
             'lastname: ' + this.lastname + '\n' +
             'profession: ' + this.profession + '\n' +
-            'imageUrl: ' + this.imageUrl + '\n';
+            'imageUrl: ' + this.imageUrl + '\n' +
+            'description: '+this.description + '\n';
     }
 }
 
@@ -23,4 +25,5 @@ export interface IPerson {
     lastname: string;
     profession: string;
     imageUrl: string;
+    description: string
 }

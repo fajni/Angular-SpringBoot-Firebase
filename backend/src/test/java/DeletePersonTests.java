@@ -8,6 +8,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -56,14 +58,14 @@ public class DeletePersonTests {
 
     @Test
     public void deletePersonTest1() throws ExecutionException, InterruptedException {
-        Person person = new Person("Test Name", "Test Lastname", "Test Profession");
+        Person person = new Person("Test Name", "Test Lastname", "Test Profession", "Test Description");
         personService.createPerson(person);
 
-        assertEquals(personService.deletePerson("2"), "Successfully deleted 2");
+        assertEquals(personService.deletePerson("2"), ResponseEntity.ok("{\"message\": \"Person with 2 id DELETED successfully\"}"));
     }
 
     @Test
     public void deletePersonTest2() throws ExecutionException, InterruptedException{
-        assertEquals(personService.deletePerson("200"), "Person with 200 document id is not found!");
+        assertEquals(personService.deletePerson("200"), ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"message\": \"Person with 200 id not found\"}"));
     }
 }

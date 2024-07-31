@@ -22,7 +22,7 @@ public class GetPersonTests {
 
     ArrayList<Person> persons;
 
-    public String newPerson = "Name: Veljko, Lastname: Fajnisevic, Profession: Student";
+    public String newPerson = "Name: Veljko, Lastname: Fajnisevic, Profession: Student, Description: My Desc";
 
     public static void connectToFirebase() {
         classLoader = CRUDRunner.class.getClassLoader();

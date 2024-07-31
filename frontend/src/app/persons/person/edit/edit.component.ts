@@ -18,11 +18,12 @@ export class EditComponent implements OnInit {
   private person!: Person;
   private personsService = inject(PersonsService);
   private destoryRef = inject(DestroyRef);
-  
+
   public editForm = new FormGroup({
     name: new FormControl('', { validators: [] }),
     lastname: new FormControl('', { validators: [] }),
     profession: new FormControl('', { validators: [] }),
+    description: new FormControl('', { validators: [] }),
     imageUrl: new FormControl('', { validators: [] }),
   });
 
@@ -31,6 +32,7 @@ export class EditComponent implements OnInit {
     this.editForm.controls.name.setValue(this.editPerson().name);
     this.editForm.controls.lastname.setValue(this.editPerson().lastname);
     this.editForm.controls.profession.setValue(this.editPerson().profession);
+    this.editForm.controls.description.setValue(this.editPerson().description);
     this.editForm.controls.imageUrl.setValue(this.editPerson().imageUrl);
   }
 
@@ -42,6 +44,7 @@ export class EditComponent implements OnInit {
     console.log('Name: ' + this.editForm.controls.name.value);
     console.log('Lastname: ' + this.editForm.controls.lastname.value);
     console.log('Profession: ' + this.editForm.controls.profession.value);
+    console.log('Description: ' + this.editForm.controls.description.value);
     console.log('Image URL: ' + this.editForm.controls.imageUrl.value);
   }
 
@@ -51,7 +54,8 @@ export class EditComponent implements OnInit {
       this.editForm.controls.name.value!,
       this.editForm.controls.lastname.value!,
       this.editForm.controls.profession.value!,
-      this.editForm.controls.imageUrl.value!
+      this.editForm.controls.imageUrl.value!,
+      this.editForm.controls.description.value!
     );
   }
 

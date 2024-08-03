@@ -1,24 +1,33 @@
-<div class="container">
-
-    <h3>Persons:</h3>
-    <button class="btn btn-success" (click)="onAddPerson()">Add Person</button>
-
-    <router-outlet />
-    <hr>
-
-    @if(isAdding()){
-        <app-add [(isAdding)]="isAdding" />
-    }
-
-    <div class="d-flex justify-content-center">
-        <div class="row">
-
-            @for (p of persons(); track p.document_id) {
-                <app-person [person]="p" />
-            } @empty {
-                <h2>No persons found!</h2>
-            }
-
-        </div>
+@if(!connectionToBackend){
+    <div class="container">
+        <h1>No Response From Backend!</h1>
+        <p>Check Port</p>
     </div>
-</div>
+} @else {
+
+    <div class="container">
+
+        <h3>Persons:</h3>
+        <button class="btn btn-success" (click)="onAddPerson()">Add Person</button>
+
+        <router-outlet />
+        <hr>
+
+        @if(isAdding()){
+            <app-add [(isAdding)]="isAdding" [(persons)]="persons" />
+        } @else {
+
+        <div class="d-flex justify-content-center">
+            <div class="row">
+
+                @for (p of persons(); track p) {
+                    <app-person [person]="p" [(persons)]="persons" />
+                } @empty {
+                    <h2>No persons found!</h2>
+                }
+
+            </div>
+        </div>
+        }
+    </div>
+}

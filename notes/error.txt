@@ -1,15 +1,45 @@
 localhost:4200 says
 Http failure during parsing for http://localhost:8080...
 
-## Error in backend: 
+## DELETE HTTP Request
 
-Use `ResponseEntity` when returning in method!
+### Frontend: 
 
-### DELETE HTTP Request
+It was necessary to again initialize Person[] array after delete request, I guess... It works now, idk
+
+<pre>
+public persons = model.required<Person[]>();
+
+public onDelete(document_id: string): void {
+    const subs = this.personsService.deletePerson(document_id).subscribe({
+      next: (value) => {  },
+      error: (error) => { alert(error.message); },
+      complete: () => {
+        console.log('Deleted person with ' + document_id + ' id!');
+
+        const subs2 =this.personsService.getPersons().subscribe({
+          next: (values) => {
+            for (let i = 0; i < values.length; i++)
+              if (values.at(i) === null) {
+                values.pop();
+              }
+            this.persons.set(values);
+          },
+          error: (error) => console.log(error.message),
+          complete: () => { }
+        });
+       this.destroyRef.onDestroy(() => {subs2.unsubscribe()});
+
+     }
+});
+</pre>
+
+### Backend:
 
 Delete http request DID NOT return the appropriate response.
 
-#### Solution:
+Use `ResponseEntity` when returning in method!
+
 - Service:
 <pre>
 public ResponseEntity<String> deletePerson(String document_id) throws ExecutionException, InterruptedException {
@@ -32,4 +62,9 @@ public ResponseEntity<String> deletePerson(String document_id) throws ExecutionE
     }
 </pre>
 
-### 
+## POST HTTP Request:
+
+
+## PUT HTPP Request:
+
+

@@ -66,6 +66,18 @@ export class EditComponent implements OnInit {
     console.log('Updated person: ' + this.person.toString());
 
     const subscription = this.personsService.editPerson(this.editPerson().document_id, this.person).subscribe({
+      next: (value) => {
+        console.log(value);
+
+        this.personsService.getPersons().subscribe({
+          next: (values) => {
+            for (let i = 0; i < values.length; i++)
+              if(values[i].document_id === this.person.document_id)
+                values[i] = value;
+          }
+        });
+        
+      },
       error: (error) => { console.log(error.message); },
       complete: () => {
         console.log('Updated person ' + this.person.document_id);

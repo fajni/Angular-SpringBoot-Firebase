@@ -18,12 +18,13 @@ export class PersonsComponent implements OnInit {
 
   public persons = signal<Person[]>([]);
   public isAdding = signal<boolean>(false);
+  public connectionToBackend: boolean = false;
 
   public getPersons() {
     const subscription = this.personsService.getPersons().subscribe({
-      next: (value) => {
-        console.log(value);
-        this.persons.set(value);
+      next: (values) => {
+        this.persons.set(values);
+        this.connectionToBackend = true;
       },
       error: () => { console.log("Error occurred!") },
       complete: () => { console.log("Getting data finished!") }

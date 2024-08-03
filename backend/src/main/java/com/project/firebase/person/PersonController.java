@@ -40,7 +40,7 @@ public class PersonController {
     }
 
     @PostMapping("/create") //localhost:8080/create
-    public String createPerson(@RequestBody Person person) throws InterruptedException, ExecutionException {
+    public ResponseEntity<String> createPerson(@RequestBody Person person) throws InterruptedException, ExecutionException {
         return personService.createPerson(person);
     }
 

@@ -86,10 +86,11 @@ public class PersonService {
         return ResponseEntity.ok("{\"message\": \"Person with "+document_id+" id DELETED successfully\"}");
     }
 
-    public String createPerson(Person person) throws ExecutionException, InterruptedException {
+    public ResponseEntity<String> createPerson(Person person) throws ExecutionException, InterruptedException {
 
         if (!checkIfPersonExist(person)) {
-            return "Person " + person.getName() + " " + person.getLastname() + " already exist!";
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"message\": \"Person with "+person.getName() + " "+ person.getLastname()+ " already exist!\"}");
+            //return "Person " + person.getName() + " " + person.getLastname() + " already exist!";
         }
 
         Firestore dbFirestore = FirestoreClient.getFirestore();
@@ -99,12 +100,13 @@ public class PersonService {
         ApiFuture<WriteResult> collectionsApiFuture = dbFirestore.collection("crud_person").document(String.valueOf(getNumberOfDocumentsIds() + 1)).set(person);
         //ApiFuture<DocumentReference> collectionsApiFuture = dbFirestore.collection("crud_person").add(person);
 
-        try {
-            return "Added new person - " + person.toString() + "\n" + collectionsApiFuture.get().getUpdateTime().toString();
-            //return collectionsApiFuture.get().toString();
-        } catch (InterruptedException | ExecutionException e) {
-            throw new RuntimeException(e);
-        }
+        return ResponseEntity.ok("{\"message\": \"Person with "+person.getDocument_id()+" id ADDED successfully\"}");
+//        try {
+//            return "Added new person - " + person.toString() + "\n" + collectionsApiFuture.get().getUpdateTime().toString();
+//            //return collectionsApiFuture.get().toString();
+//        } catch (InterruptedException | ExecutionException e) {
+//            throw new RuntimeException(e);
+//        }
     }
 
     public ResponseEntity<String> updatePerson(Person person, String document_id) throws ExecutionException, InterruptedException {

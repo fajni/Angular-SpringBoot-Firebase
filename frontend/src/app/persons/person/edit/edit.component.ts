@@ -14,6 +14,7 @@ export class EditComponent implements OnInit {
 
   public editPerson = input.required<Person>();
   public openEditModal = model.required<boolean>();
+  public persons = model.required<Person[]>();
 
   private person!: Person;
   private personsService = inject(PersonsService);
@@ -40,14 +41,6 @@ export class EditComponent implements OnInit {
     this.openEditModal.set(false);
   }
 
-  private printFormValues() {
-    console.log('Name: ' + this.editForm.controls.name.value);
-    console.log('Lastname: ' + this.editForm.controls.lastname.value);
-    console.log('Profession: ' + this.editForm.controls.profession.value);
-    console.log('Description: ' + this.editForm.controls.description.value);
-    console.log('Image URL: ' + this.editForm.controls.imageUrl.value);
-  }
-
   private createNewPerson(): Person {
     return new Person(
       this.editPerson().document_id,
@@ -60,10 +53,8 @@ export class EditComponent implements OnInit {
   }
 
   onSubmit() {
-    this.printFormValues();
 
     this.person = this.createNewPerson();
-    console.log('Updated person: ' + this.person.toString());
 
     const subscription = this.personsService.editPerson(this.editPerson().document_id, this.person).subscribe({
       next: (value) => {
@@ -81,13 +72,18 @@ export class EditComponent implements OnInit {
       error: (error) => { console.log(error.message); },
       complete: () => {
         console.log('Updated person ' + this.person.document_id);
-        window.location.reload();
       }
     });
 
     this.destoryRef.onDestroy(() => {
       subscription.unsubscribe();
     });
+
+    for(let i=0;i<this.persons().length; i++){
+      if(this.persons()[i].document_id === this.editPerson().document_id){
+        this.persons()[i] = this.person;
+      }
+    }
 
     this.openEditModal.set(false);
   }

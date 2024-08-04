@@ -25,5 +25,5 @@
 </div>
 
 @if(openEditModal()){
-    <app-edit [editPerson]="person()" [(openEditModal)]="openEditModal" />
+    <app-edit [editPerson]="person()" [(openEditModal)]="openEditModal" [(persons)]="persons" />
 }

@@ -24,7 +24,6 @@ export class PersonsService {
     }
 
     public deletePerson(document_id: string): Observable<Person> {
-        //console.log(this.link + "/delete/?document_id=" + parseInt(person.document_id));
         return this.httpClient.delete<Person>(this.link + "/delete?document_id=" + document_id);
     }
 
@@ -33,7 +32,6 @@ export class PersonsService {
     }
 
     public editPerson(document_id: string, newPerson: Person): Observable<Person> {
-        console.log(this.link + "/update/" + document_id);
         return this.httpClient.put<Person>(this.link + "/update/" + document_id, newPerson);
     }
 }

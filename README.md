@@ -1,8 +1,6 @@
 # Angular + Spring Boot + Firebase
 
-<p align = "center">
-<img src="https://miro.medium.com/v2/resize:fit:785/0*69C4SWVvcLAc4xYm.png" width="70%">
-</p>
+Simple project for learning purposes.
 
 ## Project Structure
 
@@ -34,7 +32,9 @@ Must run both __backend__ and __frontend__ together.
 
 <details>
 <summary>Image Preview</summary>
-<img src = "./notes/preview/frontend.png">
+<p align="center">
+<img src = "./notes/preview/frontend.png" width="50%">
+</p>
 </details>
 
 ### Running Backend
@@ -45,7 +45,9 @@ Must run both __backend__ and __frontend__ together.
 
 <details>
 <summary>Image Preview</summary>
-<img src = "./notes/preview/backend.PNG">
+<p align="center">
+    <img src = "./notes/preview/backend.PNG" width="50%">
+</p>
 </details>
 
 <hr/>

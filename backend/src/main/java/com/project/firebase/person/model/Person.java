@@ -1,4 +1,4 @@
-package com.project.firebase.person;
+package com.project.firebase.person.model;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
